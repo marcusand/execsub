@@ -2,6 +2,10 @@
 
 Execute a command in each subdirectory. 
 
+## Installation
+
+Drop `execsub` somewhere where it is accessible through the PATH variable and make it executable (`chmod +x`).
+
 ## Usage 
 ```sh
 cd <parent folder>
