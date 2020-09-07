@@ -1,0 +1,32 @@
+#
+# Execute given command in every subdirectory 
+# except directory specified in .env file with
+# variable SKIP=<dirname>/, <dirname>/, ...
+# 
+# Usage: ./execsub.sh "<shell command>"
+# 
+
+# read var from .env
+read_var() {
+    VAR=$(grep $1 $2 | xargs)
+    IFS="=" read -ra VAR <<< "$VAR"
+    echo ${VAR[1]}
+}
+
+envskip=$(read_var SKIP .env)
+
+# parse comma separated values in array
+IFS=', ' read -r -a skip <<< "$envskip"
+
+# go through subdirectories and execute command
+for d in ./*/ ; 
+    do 
+    if [[ "${skip[@]}" =~ "${d//.\/}" ]];
+    then
+        continue; 
+    else
+        printf "\n$d:\n";
+        echo - - - - - - - - - - - - - - -
+        (cd "$d" && eval "$1"); 
+    fi
+done
