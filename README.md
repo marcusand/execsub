@@ -1,6 +1,6 @@
 # Execsub
 
-Execute a command in every subdirectory. 
+Execute a command in each subdirectory. 
 
 ## Usage 
 ```sh
